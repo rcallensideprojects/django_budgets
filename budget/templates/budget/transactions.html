@@ -1,0 +1,49 @@
+{% extends 'budget/base.html' %}
+{% block title %}Transactions{% endblock %}
+{% block content %}
+    <h1>Transactions</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Note</th>
+                    <th>Select</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td class="id" width="15">{{ transaction.id }}</td>
+                    <td class="date" width="150">{{ transaction.date }}</td>
+                    <td class="amount" width="100">{{ transaction.amount }}</td>
+                    <td class="description" width="500">{{ transaction.description }}</td>
+                    <form action="{% url 'budget:update_transaction' transaction.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="transaction_id" value="{{ transaction.id }}">
+                        <td width="50">
+                            <select name="category_id" placeholder="Unassigned">
+                                {% for category in categories %}
+                                {% if transaction.category == category %}
+                                    <option value="{{ category.id }}" selected>{{ category.name }}</option>
+                                {% else %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="note" value="{{ transaction.note }}">
+                        </td>
+                        <td>
+                            <button type="submit">Assign</button>
+                        </td>
+                    </form>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

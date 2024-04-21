@@ -1,0 +1,29 @@
+{% extends 'budget/base.html' %}
+{% block title %}Categories{% endblock %}
+{% block content %}
+    <h1>Categories</h1>
+    <a href="{% url 'budget:create_category' %}">Create Category</a>
+    <ul>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Order</th>
+            </tr>
+        {% for category in categories %}
+        <form action="{% url 'budget:update_category' category.id %}" method="post">
+            {% csrf_token %}
+            <tr>
+                <td>
+                    <input type="text" name="name" value="{{ category.name }}">
+                </td>
+                <td>
+                    <input type="number" name="order" value="{{ category.order }}">
+                </td>
+                <td>
+                    <button type="submit">Update</button>
+                    <a href="{% url 'budget:delete_category' category.id %}">Delete</a>
+                </td>
+        </form>
+        {% endfor %}
+    </ul>
+{% endblock %}

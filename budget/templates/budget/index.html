@@ -1,0 +1,28 @@
+{% extends 'budget/base.html' %}
+{% block title %}Budget Site{% endblock %}
+{% block content %}
+    <h1>Home</h1>
+    <p>Welcome to the Budget Site!</p>
+    <!-- Create boxes of KPI's for each category based on monthly transaction average -->
+    <div class="kpi-container">
+        {% for month, categories in kpis.items %}
+            <div class="kpi-month" style="margin-bottom: 20px;">
+                <a href="{% url 'budget:transactions_filtered' month 'All' %}" style="text-decoration: none; color: inherit;">
+                    <h2>{{ month }} :: {{ categories.Total }}</h2>
+                </a>
+                <div class="kpi-boxes" style="display: flex;">
+                    {% for category, amount in categories.items %}
+                    {% if category != 'Total'%}
+                    <div class="kpi-box" style="flex: 1; margin-right: 10px; background-color: #f5f5f5; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <a href="{% url 'budget:transactions_filtered' month category%}" style="text-decoration: none; color: inherit;">
+                            <div class="category" style="font-weight: bold; margin-bottom: 5px; text-align: center;">{{ category }}</div>
+                        </a>
+                            <div class="amount" style="font-size: 1.2em; text-align: center;">{{ amount }} </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

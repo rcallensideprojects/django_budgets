@@ -1,0 +1,39 @@
+.kpi-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.kpi-month {
+    width: 250px;
+    padding: 20px;
+    margin: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.kpi-boxes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.kpi-box {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.category {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.amount {
+    font-size: 1.2em;
+}

@@ -1,7 +1,6 @@
 from django.test import TestCase
 from .models import Category, Transaction
 
-# Create your tests here.
 class CategoryModelTest(TestCase):
     def setUp(self):
         Category.objects.create(name='Test Category')
